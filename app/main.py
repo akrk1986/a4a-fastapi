@@ -1,4 +1,4 @@
-"""app.py - main code of A4A exercise"""
+"""main.py - main code of A4A exercise"""
 from fastapi import FastAPI
 # project files
 from players import Player
