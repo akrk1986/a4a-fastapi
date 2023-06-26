@@ -38,12 +38,12 @@ async def get_players():
     return countries
 
 
-@app.get("/api/players/{id}")
-async def get_player():
+@app.get("/api/players/{player_id}")
+async def get_player(player_id: int):
     if not players_loaded:
         fu = Player(csv_file='players.csv', debug=True)
-    if id in countries_dict:
-        return countries_dict[int(id)]
+    if player_id in countries_dict:
+        return countries_dict[player_id]
     raise HTTPException(status_code=404,
-                        detail=f"Error: no player with DI '{id}'")
+                        detail=f"Error: no player with ID '{player_id}'")
 
