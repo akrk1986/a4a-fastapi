@@ -1,4 +1,4 @@
-"""Handle the Player.csv data."""
+"""Handle the player CSV data."""
 
 import csv
 from pathlib import Path
@@ -6,12 +6,14 @@ from fastapi import HTTPException
 
 
 class Player:
+    """Handle the players CSV file."""
     def __init__(self, csv_file: str, debug: bool):
         self.csv_file = csv_file
         self.debug = debug
         self.rows = []          # list of dicts
         self.rows_dict = {}
-        print(f"CSV='{csv_file}'")
+        if self.debug:
+            print(f"CSV='{csv_file}'")
         csv_path = Path(self.csv_file)
         if not csv_path.is_file():
             raise HTTPException(
@@ -30,9 +32,11 @@ class Player:
                 self.rows_dict[player_id] = row
 
     def return_all(self):
+        """Return all player data."""
         return self.rows
 
     def return_one(self, player_id: str):
+        """Return player data given its ID."""
         if player_id in self.rows_dict:
             return self.rows_dict[player_id]
         raise HTTPException(status_code=404,
