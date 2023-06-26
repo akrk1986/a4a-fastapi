@@ -40,4 +40,4 @@ class Player:
         if player_id in self.rows_dict:
             return self.rows_dict[player_id]
         raise HTTPException(status_code=404,
-                            detail=f"Error: Player ID '{player_id}' is not a valid Player ID")
+                            detail=f"Error: Player ID '{player_id}' is not found in the player CSV file")
