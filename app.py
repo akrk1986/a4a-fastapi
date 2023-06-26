@@ -1,8 +1,13 @@
 # app.py
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, Field
+# project files
+from players import Player
+
 
 app = FastAPI()
+
+players_loaded = False
 
 
 def _find_next_id():
@@ -22,7 +27,23 @@ countries = [
     Country(id=3, name="Egypt", capital="Cairo", area=1010408),
 ]
 
+countries_dict = {}
+for country in countries:
+    countries_dict[country.country_id] = country.name
 
-@app.get("/countries")
-async def get_countries():
+
+@app.get("/api/players")
+async def get_players():
+    fu = Player(csv_file='players.csv', debug=True)
     return countries
+
+
+@app.get("/api/players/{id}")
+async def get_player():
+    if not players_loaded:
+        fu = Player(csv_file='players.csv', debug=True)
+    if id in countries_dict:
+        return countries_dict[int(id)]
+    raise HTTPException(status_code=404,
+                        detail=f"Error: no player with DI '{id}'")
+
