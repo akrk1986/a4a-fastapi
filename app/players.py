@@ -1,5 +1,4 @@
 """Handle the player CSV data."""
-
 import csv
 from pathlib import Path
 from fastapi import HTTPException

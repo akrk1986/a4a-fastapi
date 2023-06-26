@@ -9,6 +9,7 @@ client = TestClient(app)
 def test_get_all():
     response = client.get("/api/players")
     assert response.status_code == 200
+    # n_items = len(res)
 
 
 def test_get_nonexistent_item():
