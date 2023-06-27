@@ -5,7 +5,7 @@ from players import Player
 
 
 app = FastAPI()
-player = Player(csv_file='Data/Player.csv', debug=True)
+player = Player(csv_file='Data/Player.csv', debug=False)
 
 
 @app.get("/api/players")

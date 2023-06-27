@@ -13,7 +13,7 @@ def test_get_all():
 def test_get_nonexistent_item():
     response = client.get("/api/players/fubar")
     assert response.status_code == 404
-    assert response.json() == {"detail": "Error: Player ID 'fubar' is not found in the player CSV file"}
+    assert response.json() == {"detail": "Error: Player ID 'fubar' does not exist in the players database"}
 
 
 def test_nonexistent_path():
